@@ -39,7 +39,7 @@ module.exports = (robot) ->
           }
           data.droplets.forEach (t, i, a) ->
             table.push [t.id, t.name, t.vcpus, t.memory, t.disk, t.region.slug, t.status]
-          res.send table.toString()
+          res.send "```" + table.toString() + "```"
 
       reboot: (id) ->
         api.droplets.reboot(id).do (err, data) ->
