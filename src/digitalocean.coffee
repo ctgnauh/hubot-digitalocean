@@ -25,40 +25,40 @@ api = new Do process.env.DO_TOKEN
 cmds = ["list", "reboot", "shutdown", "on", "off", "cycle"]
 
 module.exports = (robot) ->
-  robot.hear /do\s+(\w+)(?:\s+(\w+))?/, (res) ->
+  robot.respond /do\s+(\w+)(?:\s+(\w+))?/, (res) ->
 
     exec = {
       list: () ->
         api.droplets.list().do (err, data) ->
           if err
             console.error err
-            res.send "there has something wrong"
+            res.reply "there has something wrong"
           else
-            res.send "search droplets..."
+            res.reply "search droplets..."
             lines = []
             data.droplets.forEach (t, i, a) ->
               lines.push "#{t.name} (#{t.id}): #{t.image.slug} / #{t.size_slug} Memory / #{t.disk}GB Disk / #{t.region.slug}, #{t.status}"
-            res.send lines.join "\n"
+            res.reply lines.join "\n"
 
       reboot: (id) ->
         api.droplets.reboot(id).do (err, data) ->
-          res.send "in-process"
+          res.reply "in-process"
 
       shutdown: (id) ->
         api.droplets.shutdown(id).do (err, data) ->
-          res.send "in-process"
+          res.reply "in-process"
 
       on: (id) ->
         api.droplets.power_on(id).do (err, data) ->
-          res.send "in-process"
+          res.reply "in-process"
 
       off: (id) ->
         api.droplets.power_off(id).do (err, data) ->
-          res.send "in-process"
+          res.reply "in-process"
 
       cycle: (id) ->
         api.droplets.power_cycle(id).do (err, data) ->
-          res.send "in-process"
+          res.reply "in-process"
     }
 
     subcmd = res.match[1]
@@ -67,4 +67,4 @@ module.exports = (robot) ->
     if subcmd in cmds
       exec[subcmd](arg)
     else
-      res.send "command does not exist"
+      res.reply "command does not exist"
