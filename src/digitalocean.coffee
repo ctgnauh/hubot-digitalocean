@@ -5,12 +5,12 @@
 #   DO_TOKEN - DigitalOcean API TOKEN
 #
 # Commands:
-#   do list - show all droplets
-#   do reboot <droplets_id> - reboot droplets
-#   do shutdown <droplets_id> - shutdown droplets
-#   do on <droplets_id> - power on droplets
-#   do off <droplets_id> - power off droplets
-#   do cycle <droplets_id> - power cycle droplets
+#   hubot do list - show all droplets
+#   hubot do reboot <droplets_id> - reboot droplets
+#   hubot do shutdown <droplets_id> - shutdown droplets
+#   hubot do on <droplets_id> - power on droplets
+#   hubot do off <droplets_id> - power off droplets
+#   hubot do cycle <droplets_id> - power cycle droplets
 #
 # Notes:
 #   This is an experimental script.
@@ -34,7 +34,7 @@ module.exports = (robot) ->
             console.error err
             res.reply "there has something wrong"
           else
-            res.reply "search droplets..."
+            res.send "search droplets..."
             lines = []
             data.droplets.forEach (t, i, a) ->
               lines.push "#{t.name} (#{t.id}): #{t.image.slug} / #{t.size_slug} Memory / #{t.disk}GB Disk / #{t.region.slug}, #{t.status}"
