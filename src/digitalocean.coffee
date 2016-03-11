@@ -5,12 +5,12 @@
 #   DO_TOKEN - DigitalOcean API TOKEN
 #
 # Commands:
-#   hubot do list - show all droplets
-#   hubot do reboot <droplets_id> - reboot droplets
-#   hubot do shutdown <droplets_id> - shutdown droplets
-#   hubot do on <droplets_id> - power on droplets
-#   hubot do off <droplets_id> - power off droplets
-#   hubot do cycle <droplets_id> - power cycle droplets
+#   do list - show all droplets
+#   do reboot <droplets_id> - reboot droplets
+#   do shutdown <droplets_id> - shutdown droplets
+#   do on <droplets_id> - power on droplets
+#   do off <droplets_id> - power off droplets
+#   do cycle <droplets_id> - power cycle droplets
 #
 # Notes:
 #   This is an experimental script.
@@ -19,14 +19,13 @@
 #   ctgnauh <huangtc@outlook.com>
 
 Do = require "digio-api"
-Table = require "cli-table"
 
 api = new Do process.env.DO_TOKEN
 
 cmds = ["list", "reboot", "shutdown", "on", "off", "cycle"]
 
 module.exports = (robot) ->
-  robot.respond /do\s+(\w+)(?:\s+(\w+))?/, (res) ->
+  robot.hear /do\s+(\w+)(?:\s+(\w+))?/, (res) ->
 
     exec = {
       list: () ->
@@ -34,12 +33,12 @@ module.exports = (robot) ->
           if err
             console.error err
             res.send "there has something wrong"
-          table = new Table {
-            head: ['id', 'name', 'cpu', 'mem', 'disk', 'region', 'status']
-          }
-          data.droplets.forEach (t, i, a) ->
-            table.push [t.id, t.name, t.vcpus, t.memory, t.disk, t.region.slug, t.status]
-          res.send "```" + table.toString() + "```"
+          else
+            res.send "search droplets..."
+            lines = []
+            data.droplets.forEach (t, i, a) ->
+              lines.push "#{t.name} (#{t.id}): #{t.image.slug} / #{t.size_slug} Memory / #{t.disk}GB Disk / #{t.region.slug}, #{t.status}"
+            res.send lines.join "\n"
 
       reboot: (id) ->
         api.droplets.reboot(id).do (err, data) ->

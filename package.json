@@ -13,8 +13,8 @@
     "url": "https://github.com/hubot-scripts/hubot-digitalocean/issues"
   },
   "dependencies": {
-    "cli-table": "^0.3.1",
-    "digio-api": "^1.0.0"
+    "digio-api": "^1.0.0",
+    "underscore": "^1.8.3"
   },
   "peerDependencies": {
     "hubot": "2.x"
