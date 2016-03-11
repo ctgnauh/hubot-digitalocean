@@ -6,11 +6,11 @@
 #
 # Commands:
 #   hubot do list - show all droplets
-#   hubot do reboot <droplets_id> - reboot droplets
-#   hubot do shutdown <droplets_id> - shutdown droplets
-#   hubot do on <droplets_id> - power on droplets
-#   hubot do off <droplets_id> - power off droplets
-#   hubot do cycle <droplets_id> - power cycle droplets
+#   hubot do reboot <droplets-id> - reboot droplets
+#   hubot do shutdown <droplets-id> - shutdown droplets
+#   hubot do on <droplets-id> - power on droplets
+#   hubot do off <droplets-id> - power off droplets
+#   hubot do cycle <droplets-id> - power cycle droplets
 #
 # Notes:
 #   This is an experimental script.
